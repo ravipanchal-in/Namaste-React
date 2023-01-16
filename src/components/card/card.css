@@ -1,0 +1,21 @@
+.card {
+  width: 22.8%;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0.75rem;
+}
+.card .card-img img {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.card .card-desc {
+  padding: 1rem;
+  min-height: 7rem;
+}
+.card .card-desc h4 {
+  padding: 8px 0px;
+}

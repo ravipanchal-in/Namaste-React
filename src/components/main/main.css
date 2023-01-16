@@ -1,0 +1,28 @@
+.main {
+  padding: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-view {
+  width: 100%;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+.search-view input[type="text"],
+.search-view button {
+  height: 40px;
+  font-size: 1rem;
+  padding: 5px 15px;
+}
+.search-view input[type="text"] {
+  min-width: 250px;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+.search-view button {
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  cursor: pointer;
+}
