@@ -1,37 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./main.css";
-import restrautList from "../../constants/RestaurantsList";
 import RestaurantCard from "../card/RestaurantCard";
+import ShimmerCard from "../shimmer-ui/Shimmer";
 
 const Main = () => {
   const [searchText, setSearchText] = useState("");
-  const [restaurants, setRestaurants] = useState(restrautList);
+  const [allRestaurants, setAllRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+
+  useEffect(() => {
+    getRestaurants();
+  }, []);
+
+  async function getRestaurants() {
+    const res = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.7195687&lng=75.8577258&page_type=DESKTOP_WEB_LISTING"
+    );
+    const jsonData = await res.json();
+    setAllRestaurants(jsonData?.data?.cards[2]?.data?.data?.cards);
+    setFilteredRestaurants(jsonData?.data?.cards[2]?.data?.data?.cards);
+  }
 
   const handleSearch = () => {
-    const filteredData = restaurants.filter((item) =>
-      item.data.name.includes(searchText)
+    const filteredData = allRestaurants.filter((item) =>
+      item?.data?.name?.toLowerCase()?.includes(searchText?.toLowerCase())
     );
-    setRestaurants(filteredData);
+    setFilteredRestaurants(filteredData);
   };
 
-  console.log("restaurants", restaurants);
-  console.log("searchText", searchText);
-  return (
+  return !allRestaurants ? null : (
     <main className="container">
       <div className="row">
         <div className="search-view">
-          <input
-            onChange={(e) => setSearchText(e.target.value)}
-            value={searchText}
-            type="text"
-            placeholder="Search here..."
-          />
-          <button onClick={() => handleSearch()}>Search</button>
+          <div>{filteredRestaurants?.length} restaurants</div>
+          <div>
+            <input
+              onChange={(e) => setSearchText(e.target.value)}
+              value={searchText}
+              type="text"
+              placeholder="Search here..."
+            />
+            <button onClick={() => handleSearch()}>Search</button>
+          </div>
         </div>
         <div className="main">
-          {restaurants?.map((item) => (
-            <RestaurantCard key={item.data.id} {...item.data} />
-          ))}
+          {allRestaurants?.length === 0
+            ? Array(12)
+                .fill("")
+                .map((item, index) => <ShimmerCard key={index} />)
+            : filteredRestaurants?.map((item) => (
+                <RestaurantCard key={item.data.id} {...item.data} />
+              ))}
+          {filteredRestaurants?.length === 0 && <h1>No Restaurant found</h1>}
         </div>
       </div>
     </main>

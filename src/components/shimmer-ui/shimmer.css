@@ -1,0 +1,91 @@
+.shimmer-card {
+  width: 22.8%;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0.75rem;
+}
+.shimmer-card .shimmer-card-img img {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.shimmer-card .shimmer-card-desc {
+  padding: 1rem;
+  min-height: 7rem;
+}
+.shimmer-card .shimmer-card-desc h4 {
+  padding: 8px 0px;
+}
+
+.shimmer-card .shimmer-card-img .img {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  background: #dfdfdf;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.shimmer-card .shimmer-card-img .img::before,
+.shimmer-card .shimmer-card-desc .line::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    to right,
+    #d9d9d9 0%,
+    #b3b3b3 20%,
+    #d9d9d9 40%,
+    #d9d9d9 100%
+  );
+  background-size: 450px 400px;
+  background-repeat: no-repeat;
+  animation: shimmer 1.4s linear infinite;
+}
+
+.skeleton .card .content {
+  margin-top: 14px;
+}
+
+.line {
+  height: 17px;
+  width: 100%;
+  background: #dfdfdf;
+  border-radius: 0;
+  margin: 10px 0;
+  position: relative;
+  overflow: hidden;
+}
+.line.line-2 {
+  width: 100%;
+  height: 13px;
+  margin-top: 0px;
+}
+.flex-item {
+  width: 100%;
+  display: flex;
+  align-items: top;
+  justify-content: space-between;
+}
+
+.flex-item .line.line-3 {
+  max-width: 60px;
+}
+.content .line.line-3 {
+  width: 100%;
+  height: 20px;
+  margin-top: 18px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -450px 0px;
+  }
+  100% {
+    background-position: 450px 0px;
+  }
+}
